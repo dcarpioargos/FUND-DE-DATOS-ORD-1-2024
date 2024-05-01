@@ -1,7 +1,35 @@
-use sys
-SELECT * FROM sys_config
+/* use sys */
+-- SELECT * FROM sys_config
+
+-- //COMANDOS
+-- //CREAR BASE DE DATOS
+
+-- CREATE DATABASE materia_fdb
+-- // definir por defecto db
+-- USE materia_fdb
+
+-- crear tablas
+/*CREATE TABLE NOMBRE_TABLA (
+	PROPIEDAD TIPO_DATO,
+    PROPIEDAD TIPO_DATO,
+    PROPIEDAD TIPO_DATO,
+	PROPIEDAD TIPO_DATO,
+);*/
+
+CREATE TABLE AUTOS(
+	-- ID INT AUTO_INCREMENT,
+    PLACA VARCHAR(8),
+    MODELO VARCHAR(30),
+    MARCA VARCHAR(50),
+    COLOR VARCHAR (40),
+    CANT_NEUMATICO INT,
+    IsDisponible BOOLEAN
+);
 
 
-uaudgwagduhhqwiudg igqwwidugqiuwduqhhwdi
+SELECT * FROM autos
+
+
+
 
 
