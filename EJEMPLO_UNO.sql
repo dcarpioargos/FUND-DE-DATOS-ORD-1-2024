@@ -30,15 +30,18 @@ CREATE TABLE AUTOS(
 SELECT * FROM autos
 -- insertar datos en tabla de forma individual
 INSERT INTO autos (PLACA, MODELO, MARCA, COLOR, CANT_NEUMATICO, IsDisponible) 
-			VALUES ("ABC-1234", "AVEO", "CHEVROLET", "ROJO", 5, true)
+			VALUES ("ABC-1234", "AVEO", "CHEVROLET", "MORADO", "5", "1")
 
 -- insertar datos en tabla de forma grupal            
-INSERT INTO autos (PLACA, MODELO, MARCA, COLOR, CANT_NEUMATICO, IsDisponible) 
-VALUES ("XYZ-5432", "AVEO", "CHEVROLET", "ROJO", 5, true),
-	   ("JKL-1524", "RENAULT MODEL", "RENAULT", "AZUL", 4, false),
-	   ("OIP-1523", "KIA MODEL", "KIA", "AMARILLO", 6, true)
+INSERT INTO autos (PLACA, MODELO, MARCA, COLOR) 
+VALUES ("XYZ-9999", "AVEO", "CHEVROLET", 125),
+	   ("JKL-1524", "RENAULT MODEL", "RENAULT", "AZUL"),
+	   ("OIP-1523", "KIA MODEL", "KIA", "AMARILLO")
 
 
+    
+    
+    
 
 
 
