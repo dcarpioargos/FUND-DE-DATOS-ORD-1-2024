@@ -55,11 +55,13 @@ use materia_fdb
 
 -- OIP-1523
 UPDATE autos
-SET IsDisponible = false
-	-- CANT_NEUMATICO = 4
-WHERE ID >= 1 AND CANT_NEUMATICO = 5
+SET COLOR = "ROJO" 
+WHERE ID > 1 OR CANT_NEUMATICO = 5; -- AND MODELO = "AVEO";
+SELECT * FROM autos
 
 
+
+ 
  
 
  
