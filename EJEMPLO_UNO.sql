@@ -59,15 +59,7 @@ SET IsDisponible = false
 	-- CANT_NEUMATICO = 4
 WHERE ID >= 1 AND CANT_NEUMATICO = 5
 
-0	29	22:10:06	UPDATE autos
- SET IsDisponible = false,
-  -- CANT_NEUMATICO = 4
- WHERE ID >= 1 AND CANT_NEUMATICO = 5	
- Error Code: 1064. You have an error in your SQL s
- yntax; check the manual that corresponds to 
- your MySQL server version for the right syntax 
- to use near 'WHERE ID >= 1 AND CANT_NEUMATICO = 5' 
- at line 4	0.000 sec
+
  
 
  
