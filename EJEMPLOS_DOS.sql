@@ -167,10 +167,21 @@ SELECT * FROM ventas;
 SELECT * FROM libros AS l, ventas AS v
 WHERE l.id_libro = v.id_libro;
 -- ejercicio respuesta
-SELECT l.categoria, COUNT(l.id_libro) AS cant_libros FROM libros AS l, ventas AS v
-WHERE l.id_libro = v.id_libro 
-GROUP BY l.categoria;
+SELECT 
+	l.categoria AS cat, 
+    COUNT(l.id_libro) AS cant_libros,
+    SUM(v.cantidad) AS total_cant_libros,
+    AVG(l.precio) AS precio_promedio,
+    MAX(l.precio) AS precio_maximo,
+    MIN(l.precio) AS precio_minimo
+FROM libros AS l, ventas AS v
+WHERE l.id_libro = v.id_libro -- AND v.cantidad >= 16
+GROUP BY l.categoria
+HAVING total_cant_libros > 1
+ORDER BY total_cant_libros DESC;
 
+Error Code: 1054. Unknown column 'total_cant_libros' in 'where clause'	
+ 
 
 -- joins
 SELECT * FROM libros l
@@ -179,3 +190,42 @@ on l.id_libro = v.id_libro
 inner join tabla3 t3
 on t3.id_ = l.id_libro
 where
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+============ EJERCICIO 2 =====================
+
+- Analiza el rendimiento de ventas por autor. 
+Proporciona para cada autor que ha vendido al menos 10 libros en total, un informe que muestre lo siguiente:
+- El nombre del autor
+- El número total de libros diferentes que ha vendido
+- La cantidad total de libros vendidos
+- El ingreso total generado por sus ventas
+- El precio promedio de sus libros
+- El título de su libro más caro
+- Ordena los resultados por el ingreso total generado en orden descendente.
