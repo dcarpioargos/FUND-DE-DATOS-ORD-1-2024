@@ -229,3 +229,49 @@ Proporciona para cada autor que ha vendido al menos 10 libros en total, un infor
 - El precio promedio de sus libros
 - El título de su libro más caro
 - Ordena los resultados por el ingreso total generado en orden descendente.
+
+
+
+
+-- ================SP - STORE PROCEDURE =================
+
+CREATE TABLE cars (
+  id INT AUTO_INCREMENT,
+  brand VARCHAR(50),
+  model VARCHAR(50),
+  year INT,
+  color VARCHAR(20),
+  features TEXT,
+  PRIMARY KEY (id)
+);
+
+INSERT INTO cars (brand, model, year, color, features)
+VALUES
+  ('Toyota', 'Corolla', 2015, 'Silver', 'ABS, Airbags'),
+  ('Toyota', 'Corolla', 2016, 'Black', 'ABS, Airbags, Cruise Control'),
+  ('Honda', 'Civic', 2017, 'Red', 'ABS, Airbags, Bluetooth'),
+  ('Honda', 'Civic', 2018, 'White', 'ABS, Airbags, Bluetooth, Navigation'),
+  ('Ford', 'Focus', 2019, 'Blue', 'ABS, Airbags, Bluetooth, Navigation, Heated Seats');
+
+
+
+DROP PROCEDURE IF EXISTS lista_autos_con_un_param;
+DELIMITER //
+CREATE PROCEDURE lista_autos_con_un_param( IN _model VARCHAR(50), IN _id INT )
+BEGIN
+	SELECT * FROM taller_2.cars where model = _model AND id = _id;
+END //
+DELIMITER ;
+CALL lista_autos_con_un_param("Corolla", 1);
+CALL lista_autos_con_un_param("Corolla", 2);
+
+-- ================JOINS ====================
+SELECT * FROM materia_fdb.ventas;
+SELECT * FROM materia_fdb.libros;
+-- INNER JOIN
+SELECT 
+	*
+FROM ventas AS vta
+INNER JOIN libros AS lib ON vta.id_libro = lib.id_libro 
+RIGHT JOIN libros AS lib2 ON vta.id_libro = lib2.id_libro 
+LEFT JOIN libros AS lib3 ON vta.id_libro = lib3.id_libro 
