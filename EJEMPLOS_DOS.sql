@@ -193,31 +193,6 @@ where
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ============ EJERCICIO 2 =====================
 
 - Analiza el rendimiento de ventas por autor. 
@@ -230,10 +205,22 @@ Proporciona para cada autor que ha vendido al menos 10 libros en total, un infor
 - El título de su libro más caro
 - Ordena los resultados por el ingreso total generado en orden descendente.
 
+SELECT * FROM libros AS l, ventas AS v WHERE l.id_libro = v.id_libro;
+SELECT 
+     l.autor AS "Nombre del Autor",
+     COUNT(DISTINCT l.id_libro) AS "Numero de Libros Vendidos",
+     SUM(v.cantidad) AS cantidad_total_vendidad,
+     SUM(v.cantidad * l.precio) AS Ingreso_Total, 
+     AVG(l.precio) AS promedio_precio
+FROM libros AS l, ventas AS v
+WHERE l.id_libro = v.id_libro
+GROUP BY l.autor
+
+select * from libros;
 
 
+-- =============== SP - STORE PROCEDURE ===============
 
--- ================SP - STORE PROCEDURE =================
 
 CREATE TABLE cars (
   id INT AUTO_INCREMENT,
@@ -254,6 +241,16 @@ VALUES
   ('Ford', 'Focus', 2019, 'Blue', 'ABS, Airbags, Bluetooth, Navigation, Heated Seats');
 
 
+SELECT * FROM taller_2.cars;
+
+DELIMITER //
+CREATE PROCEDURE lista_autos()
+BEGIN
+	SELECT * FROM taller_2.cars;
+END //
+DELIMITER ;
+
+CALL lista_autos();
 
 DROP PROCEDURE IF EXISTS lista_autos_con_un_param;
 DELIMITER //
@@ -265,6 +262,7 @@ DELIMITER ;
 CALL lista_autos_con_un_param("Corolla", 1);
 CALL lista_autos_con_un_param("Corolla", 2);
 
+
 -- ================JOINS ====================
 SELECT * FROM materia_fdb.ventas;
 SELECT * FROM materia_fdb.libros;
@@ -274,4 +272,40 @@ SELECT
 FROM ventas AS vta
 INNER JOIN libros AS lib ON vta.id_libro = lib.id_libro 
 RIGHT JOIN libros AS lib2 ON vta.id_libro = lib2.id_libro 
-LEFT JOIN libros AS lib3 ON vta.id_libro = lib3.id_libro 
+LEFT JOIN libros AS lib3 ON vta.id_libro = lib3.id_libro ;
+
+
+-- CONSULTA CON JOIN Y FUNCIONES DE AGREGACIÓN
+
+
+SELECT 
+     l.autor AS "Nombre del Autor",
+     COUNT(DISTINCT l.id_libro) AS "Numero de Libros Vendidos",
+     SUM(v.cantidad) AS cantidad_total_vendidad,
+     SUM(v.cantidad * l.precio) AS Ingreso_Total, 
+     AVG(l.precio) AS promedio_precio
+FROM libros AS l 
+INNER JOIN ventas v ON l.id_libro = v.id_libro
+GROUP BY l.autor;
+
+
+-- CONSULTA CON JOIN, PROCEDIMIENTOS ALMACENADOS, Y FUNCIONES DE AGREGACIÓN
+-- ES SIMILAR AL PROYECTO
+DROP PROCEDURE IF EXISTS lista_autos_con_un_param;
+DELIMITER //
+CREATE PROCEDURE lista_autos_con_un_param( IN _nombre_autor VARCHAR(50) )
+BEGIN
+	SELECT 
+     l.autor AS "Nombre del Autor",
+     COUNT(DISTINCT l.id_libro) AS "Numero de Libros Vendidos",
+     SUM(v.cantidad) AS cantidad_total_vendidad,
+     SUM(v.cantidad * l.precio) AS Ingreso_Total, 
+     AVG(l.precio) AS promedio_precio
+FROM libros AS l 
+INNER JOIN ventas v ON l.id_libro = v.id_libro
+WHERE l.autor = _nombre_autor 
+GROUP BY l.autor;
+END //
+DELIMITER ;
+CALL lista_autos_con_un_param("Bram Stoker");
+CALL lista_autos_con_un_param("Dante Alighieri");
